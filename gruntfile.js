@@ -22,37 +22,41 @@ module.exports = function (grunt) {
 
     // watch for files to change and run tasks when they do
     watch: {
-      sass: {
+      postcss: {
         files: ['_sass/**/*.{scss,sass}'],
-        tasks: ['sass']
+        tasks: ['postcss']
+      },
+      javascript: {
+        files: ['_js/main/script.js'],
+        tasks: ['uglify']
       }
     },
 
     // sass (libsass) config
-    sass: {
-      options: {
-        sourceMap: true,
-        relativeAssets: false,
-        outputStyle: 'expanded',
-        sassDir: '_sass',
-        cssDir: '_site/css'
-      },
-      build: {
-        files: [{
-          expand: true,
-          cwd: '_sass/',
-          src: ['**/*.{scss,sass}'],
-          dest: '_site/css',
-          ext: '.css'
-        }]
-      }
-    },
+    // sass: {
+    //   options: {
+    //     sourceMap: true,
+    //     relativeAssets: false,
+    //     outputStyle: 'expanded',
+    //     sassDir: '_sass',
+    //     cssDir: '_site/css'
+    //   },
+    //   build: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '_sass/',
+    //       src: ['**/*.{scss,sass}'],
+    //       dest: '_site/css',
+    //       ext: '.css'
+    //     }]
+    //   }
+    // },
 
     // run tasks in parallel
     concurrent: {
       serve: [
         'postcss',
-        'sass',
+        'uglify',
         'watch',
         'shell:jekyllServe'
       ],
@@ -61,36 +65,55 @@ module.exports = function (grunt) {
       }
     },
 
+    // postcss config
     postcss: {
- 
       options: {
+        syntax: require('postcss-scss'),
+        map: {
+          inline: false,
+          annotation: '_site/css/maps/'
+        },
         processors: [
           require('autoprefixer')({browsers: ['last 2 version']})
         ]
       },
       dist: {
-        src: '**/*.{scss,sass}',
-        dest: '_site/css'
+        files: [{
+          src: ['_sass/**/*.{scss,sass}'],
+          dest: '_site/css/main.css'
+        }]
       }
  
+    },
+
+    // contrib-uglify config
+    uglify: {
+      my_target: {
+        files: {
+          '_site/js/corus.min.js': ['_js/main/script.js']
+        }
+      }
     }
 
   });
 
   // Register the grunt serve task
   grunt.registerTask('serve', [
-    'shell:jekyllServe'
+    'concurrent:serve'
   ]);
 
   // Register the grunt build task
   grunt.registerTask('build', [
     'shell:jekyllBuild',
-    'sass'
+    'postcss',
+    'uglify'
   ]);
+
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Register build as the default task fallback
   grunt.registerTask('default', 'build');
-  grunt.loadNpmTasks('grunt-concurrent');
-  grunt.loadNpmTasks('grunt-postcss');
 
 };
