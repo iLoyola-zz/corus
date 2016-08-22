@@ -22,9 +22,9 @@ module.exports = function (grunt) {
 
     // watch for files to change and run tasks when they do
     watch: {
-      postcss: {
+      sass: {
         files: ['_sass/**/*.{scss,sass}'],
-        tasks: ['postcss']
+        tasks: ['sass', 'postcss']
       },
       javascript: {
         files: ['_js/main/script.js'],
@@ -33,29 +33,43 @@ module.exports = function (grunt) {
     },
 
     // sass (libsass) config
-    // sass: {
-    //   options: {
-    //     sourceMap: true,
-    //     relativeAssets: false,
-    //     outputStyle: 'expanded',
-    //     sassDir: '_sass',
-    //     cssDir: '_site/css'
-    //   },
-    //   build: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '_sass/',
-    //       src: ['**/*.{scss,sass}'],
-    //       dest: '_site/css',
-    //       ext: '.css'
-    //     }]
-    //   }
-    // },
+    sass: {
+      options: {
+        sourceMap: true,
+        relativeAssets: false,
+        outputStyle: 'expanded',
+        sassDir: '_sass',
+        cssDir: '_site/css'
+      },
+      build: {
+        files: [{
+          expand: true,
+          cwd: '_sass/',
+          src: ['**/*.{scss,sass}'],
+          dest: '_site/css',
+          ext: '.css'
+        }]
+      }
+    },
+
+    postcss: {
+      options: {
+        map: true,
+        processors: [
+          require('autoprefixer')({
+            browsers: ['last 2 versions']
+          })
+        ]
+      },
+      dist: {
+        src: '_site/css/main.css'
+      }
+    },
 
     // run tasks in parallel
     concurrent: {
       serve: [
-        'postcss',
+        'sass',
         'uglify',
         'watch',
         'shell:jekyllServe'
@@ -63,27 +77,6 @@ module.exports = function (grunt) {
       options: {
         logConcurrentOutput: true
       }
-    },
-
-    // postcss config
-    postcss: {
-      options: {
-        syntax: require('postcss-scss'),
-        map: {
-          inline: false,
-          annotation: '_site/css/maps/'
-        },
-        processors: [
-          require('autoprefixer')({browsers: ['last 2 version']})
-        ]
-      },
-      dist: {
-        files: [{
-          src: ['_sass/**/*.{scss,sass}'],
-          dest: '_site/css/main.css'
-        }]
-      }
- 
     },
 
     // contrib-uglify config
@@ -105,12 +98,14 @@ module.exports = function (grunt) {
   // Register the grunt build task
   grunt.registerTask('build', [
     'shell:jekyllBuild',
+    'sass',
     'postcss',
     'uglify'
   ]);
 
-  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Register build as the default task fallback
