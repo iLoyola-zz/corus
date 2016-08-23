@@ -23,11 +23,11 @@ module.exports = function (grunt) {
     // watch for files to change and run tasks when they do
     watch: {
       sass: {
-        files: ['_sass/**/*.{scss,sass}'],
+        files: ['_assets/css/**/*.{scss,sass}'],
         tasks: ['sass', 'postcss']
       },
       javascript: {
-        files: ['_js/main/script.js'],
+        files: ['_assets/js/script.js'],
         tasks: ['uglify']
       }
     },
@@ -38,13 +38,13 @@ module.exports = function (grunt) {
         sourceMap: true,
         relativeAssets: false,
         outputStyle: 'expanded',
-        sassDir: '_sass',
+        sassDir: '_assets/css',
         cssDir: '_site/css'
       },
       build: {
         files: [{
           expand: true,
-          cwd: '_sass/',
+          cwd: '_assets/css',
           src: ['**/*.{scss,sass}'],
           dest: '_site/css',
           ext: '.css'
@@ -54,7 +54,6 @@ module.exports = function (grunt) {
 
     postcss: {
       options: {
-        map: true,
         processors: [
           require('autoprefixer')({
             browsers: ['last 2 versions']
@@ -62,7 +61,8 @@ module.exports = function (grunt) {
         ]
       },
       dist: {
-        src: '_site/css/main.css'
+        src: '_site/css/main.css',
+        dest: '_site/css/main.css'
       }
     },
 
@@ -70,6 +70,7 @@ module.exports = function (grunt) {
     concurrent: {
       serve: [
         'sass',
+        'postcss',
         'uglify',
         'watch',
         'shell:jekyllServe'
@@ -83,7 +84,7 @@ module.exports = function (grunt) {
     uglify: {
       my_target: {
         files: {
-          '_site/js/corus.min.js': ['_js/main/script.js']
+          '_site/js/script.js': ['_assets/js/script.js']
         }
       }
     }

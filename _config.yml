@@ -17,5 +17,5 @@ github_username:  iloyola
 
 # Build settings
 markdown: kramdown
-exclude: ['node_modules', 'css', '_scss']
-keep_files: ['_site/css']
+exclude: ['node_modules', 'css', '_assets', 'gruntfile.js', 'package.json']
+keep_files: ['_site/css', '_site/js']
