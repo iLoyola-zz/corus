@@ -1,14 +1,17 @@
 var corusURL = 'https://static.globalnews.ca/content/test/results-2011.js';
 
 function gNews_getRidingDetailsCallback( data ) {
-  console.log( data.length );
-  var corusCardOutput = '';
   for( var i = 0; i<data.length; i++ ){
-    corusCardOutput += '<input class="corus-open" type="radio" id="corus-' + data[i].num + '" name="corus" aria-hidden="true" hidden="" checked="checked"><div class="corus-item' + data[i].num + '"><div class="corus-card"><h1 class="corus-card-heading"></h1><ol class="corus-card-list"><li class="corus-card-list-item"><div class="corus-card-party"></div><div class="corus-card-candidate"></div><div class="corus-card-total"></div><div class="corus-card-percent"></div></li></ol></div></div>'
-    $( '.js-riding-card-container' ).append( corusCardOutput );
-    corusCardOutput = '';
+    console.log( i );
+    var corusCardOutput = '';
+    corusCardOutput += '<div class="corus-card corus-card-' + data[i].num + '"><h1 class="corus-card-heading">' + data[i].name + '</h1><ol class="corus-card-list">';
+    console.log( i );
+    for ( var j = 0; j<data[i].results.length; j++ ) {
+      corusCardOutput += '<li class="corus-card-list-item"><span class="corus-card-party">' + data[i].results[j].partyCode + '</span><span class="corus-card-candidate">' + data[i].results[j].name + '</span><span class="corus-card-total">' + data[i].results[j].votes + '</span><span class="corus-card-percent"></span></li>';
+    }
+    corusCardOutput += '</ol></div>';
+    $( '.js-corus-item' + i ).append( corusCardOutput );
   }
-  $( '.corus-item1' ).attr( 'checked','checked' );
 }
 
 $( document ).ready( function(){
