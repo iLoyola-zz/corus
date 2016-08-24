@@ -242,37 +242,38 @@ pre {
 }
 
 
-.carousel {
+.corus {
   position: relative;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
   margin-top: 26px;
 }
 
-.carousel-inner {
+.corus-inner {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 
-.carousel-open:checked + .carousel-item {
+.corus-open:checked + .corus-item {
   position: static;
   opacity: 100;
 }
 
-.carousel-item {
+.corus-item {
   position: absolute;
   opacity: 0;
   -webkit-transition: opacity 0.6s ease-out;
   transition: opacity 0.6s ease-out;
 }
 
-.carousel-item img {
+.corus-card {
   display: block;
   height: auto;
   max-width: 100%;
+  min-height: 280px;
 }
 
-.carousel-control {
+.corus-control {
   background: rgba(0, 0, 0, 0.28);
   border-radius: 50%;
   color: #fff;
@@ -292,26 +293,33 @@ pre {
   z-index: 10;
 }
 
-.carousel-control.prev {
+.corus-control.prev {
   left: 2%;
 }
 
-.carousel-control.next {
+.corus-control.next {
   right: 2%;
 }
 
-.carousel-control:hover {
+.corus-control:hover {
   background: rgba(0, 0, 0, 0.8);
   color: #aaaaaa;
 }
 
-#carousel-1:checked ~ .control-1,
-#carousel-2:checked ~ .control-2,
-#carousel-3:checked ~ .control-3 {
+#corus-1:checked ~ .control-1,
+#corus-2:checked ~ .control-2,
+#corus-3:checked ~ .control-3,
+#corus-4:checked ~ .control-4,
+#corus-5:checked ~ .control-5,
+#corus-6:checked ~ .control-6,
+#corus-7:checked ~ .control-7,
+#corus-8:checked ~ .control-8,
+#corus-9:checked ~ .control-9,
+#corus-10:checked ~ .control-10 {
   display: block;
 }
 
-.carousel-indicators {
+.corus-indicators {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -323,25 +331,32 @@ pre {
   z-index: 10;
 }
 
-.carousel-indicators li {
+.corus-indicators li {
   display: inline-block;
   margin: 0 5px;
 }
 
-.carousel-bullet {
+.corus-bullet {
   color: #fff;
   cursor: pointer;
   display: block;
   font-size: 35px;
 }
 
-.carousel-bullet:hover {
+.corus-bullet:hover {
   color: #aaaaaa;
 }
 
-#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+#corus-1:checked ~ .control-1 ~ .corus-indicators li:nth-child(1) .corus-bullet,
+#corus-2:checked ~ .control-2 ~ .corus-indicators li:nth-child(2) .corus-bullet,
+#corus-3:checked ~ .control-3 ~ .corus-indicators li:nth-child(3) .corus-bullet,
+#corus-4:checked ~ .control-4 ~ .corus-indicators li:nth-child(4) .corus-bullet,
+#corus-5:checked ~ .control-5 ~ .corus-indicators li:nth-child(5) .corus-bullet,
+#corus-6:checked ~ .control-6 ~ .corus-indicators li:nth-child(6) .corus-bullet,
+#corus-7:checked ~ .control-7 ~ .corus-indicators li:nth-child(7) .corus-bullet,
+#corus-8:checked ~ .control-8 ~ .corus-indicators li:nth-child(8) .corus-bullet,
+#corus-9:checked ~ .control-9 ~ .corus-indicators li:nth-child(9) .corus-bullet,
+#corus-10:checked ~ .control-10 ~ .corus-indicators li:nth-child(10) .corus-bullet {
   color: #428bca;
 }
 

@@ -4,20 +4,64 @@ layout: default
 
 <div class="home">
 
-  <h1 class="page-heading">Posts</h1>
+  <div class="corus">
+    <div class="corus-inner">
+        <div class="js-riding-card-container">
+        </div>
+        <label for="corus-10" class="corus-control prev control-1">‹</label>
+        <label for="corus-2" class="corus-control next control-1">›</label>
+        <label for="corus-1" class="corus-control prev control-2">‹</label>
+        <label for="corus-3" class="corus-control next control-2">›</label>
+        <label for="corus-2" class="corus-control prev control-3">‹</label>
+        <label for="corus-4" class="corus-control next control-3">›</label>
+        <label for="corus-3" class="corus-control prev control-4">‹</label>
+        <label for="corus-5" class="corus-control next control-4">›</label>
+        <label for="corus-5" class="corus-control prev control-5">‹</label>
+        <label for="corus-6" class="corus-control next control-5">›</label>
+        <label for="corus-5" class="corus-control prev control-6">‹</label>
+        <label for="corus-7" class="corus-control next control-6">›</label>
+        <label for="corus-6" class="corus-control prev control-7">‹</label>
+        <label for="corus-8" class="corus-control next control-7">›</label>
+        <label for="corus-7" class="corus-control prev control-8">‹</label>
+        <label for="corus-9" class="corus-control next control-8">›</label>
+        <label for="corus-8" class="corus-control prev control-9">‹</label>
+        <label for="corus-10" class="corus-control next control-9">›</label>
+        <label for="corus-9" class="corus-control prev control-10">‹</label>
+        <label for="corus-1" class="corus-control next control-10">›</label>
+        <ol class="corus-indicators">
+            <li>
+                <label for="corus-1" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-2" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-3" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-4" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-5" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-6" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-7" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-8" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-9" class="corus-bullet">•</label>
+            </li>
+            <li>
+                <label for="corus-10" class="corus-bullet">•</label>
+            </li>
+        </ol>
+    </div>
+</div>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>
